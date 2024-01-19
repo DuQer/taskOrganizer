@@ -14,7 +14,9 @@ if (Qt6_VERSION VERSION_GREATER_EQUAL 6.3)
 endif()
 
 qt_add_executable(taskOrganizerApp src/main.cpp
-    .gitignore)
+    .gitignore
+    Model.qml
+    qmldir)
 
 qt_add_resources(taskOrganizerApp "configuration"
     PREFIX "/"
