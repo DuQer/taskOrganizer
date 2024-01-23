@@ -5,15 +5,13 @@ import QtQuick 6.2
 import taskOrganizer
 
 Window {
-    width: mainScreen.width
-    height: mainScreen.height
-
     visible: true
-    title: "taskOrganizer"
+    width: 400
+    height: 300
+    title: qsTr("Task manager")
+    color: "#26648E"
 
-    Screen01 {
-        id: mainScreen
+    RightPanel {
     }
-
 }
 
