@@ -8,6 +8,7 @@
 #include "import_qml_components_plugins.h"
 #include "import_qml_plugins.h"
 #include "src/task.h"
+#include "src/taskhttpclient.h"
 
 int main(int argc, char *argv[])
 {
@@ -36,6 +37,12 @@ int main(int argc, char *argv[])
 
     engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
     engine.addImportPath(":/");
+
+    QUrl apiUrl("https://jsonplaceholder.typicode.com/todos/1");  // Replace with your actual API endpoint
+    TaskHttpClient* client = new TaskHttpClient();
+    QByteArray jsonData = client->makeGetRequest(apiUrl);
+
+    qDebug() << "Received JSON data:" << jsonData;
 
     engine.load(url);
 
