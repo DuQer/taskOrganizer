@@ -3,10 +3,11 @@
 
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-
+#include <QQmlContext>
 #include "app_environment.h"
 #include "import_qml_components_plugins.h"
 #include "import_qml_plugins.h"
+#include "src/task.h"
 
 int main(int argc, char *argv[])
 {
@@ -25,6 +26,13 @@ int main(int argc, char *argv[])
                 QCoreApplication::exit(-1);
         },
         Qt::QueuedConnection);
+
+    // Rejestracja klasy Task do użycia w QML
+    qmlRegisterType<Task>("MyTasks", 1, 0, "Task");
+
+    // Tworzenie obiektu Task i przekazanie go do QML
+    Task task;
+    engine.rootContext()->setContextProperty("myTask", &task);
 
     engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
     engine.addImportPath(":/");
