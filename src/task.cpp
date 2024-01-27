@@ -1,9 +1,10 @@
 #include "task.h"
 
 Task::Task(QObject *parent)
-    : QObject(parent), m_id(0), m_completed(false)
-{
-}
+    : QObject(parent)
+    , m_id(0)
+    , m_completed(false)
+{}
 
 int Task::id() const
 {

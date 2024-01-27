@@ -1,16 +1,16 @@
 #ifndef TASKHTTPCLIENT_H
 #define TASKHTTPCLIENT_H
 
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
 #include <QEventLoop>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
 
 class TaskHttpClient
 {
 public:
     TaskHttpClient();
-    QByteArray makeGetRequest(const QUrl& url);
+    QByteArray makeGetRequest(const QUrl &url);
 };
 
 #endif // TASKHTTPCLIENT_H
