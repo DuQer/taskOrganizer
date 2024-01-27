@@ -17,7 +17,8 @@ qt_add_executable(taskOrganizerApp src/main.cpp
     .gitignore
     src/task.h
     src/task.cpp
-    src/taskhttpclient.h src/taskhttpclient.cpp)
+    src/taskhttpclient.h src/taskhttpclient.cpp
+    src/mapper/taskjsonmapper.h src/mapper/taskjsonmapper.cpp)
 
 qt_add_resources(taskOrganizerApp "configuration"
     PREFIX "/"
