@@ -5,13 +5,14 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include "src/task.h"
 
 class TaskHttpClient
 {
 public:
     TaskHttpClient();
-    QByteArray GetAllTasks();
-    QByteArray GetSingleTaskById(const QUrl &url, const int id);
+    QList<Task*> GetAllTasks();
+    Task* GetSingleTaskById(const QUrl &url, const int id);
 
 private:
     QByteArray MakeGetRequest(const QUrl &url);
