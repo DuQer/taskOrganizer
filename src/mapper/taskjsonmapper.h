@@ -9,6 +9,7 @@ class TaskJSONMapper
 public:
     TaskJSONMapper();
     Task* FromJSON(QByteArray jsonData);
+    QList<Task*> ListFromJSON(QByteArray jsonData);
     Task* InitializeTaskWithJsonData(QJsonObject jsonObject);
 };
 
