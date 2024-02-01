@@ -9,7 +9,12 @@ TaskHttpClient::TaskHttpClient()
     // Constructor code, if any
 }
 
-QByteArray TaskHttpClient::makeGetRequest(const QUrl &url)
+QByteArray TaskHttpClient::GetAllTasks() {
+    //QString GET_ALL_TASKS_URL = BASIC_URL + "/task";
+    return MakeGetRequest(BASIC_URL);
+}
+
+QByteArray TaskHttpClient::MakeGetRequest(const QUrl &url)
 {
     QNetworkAccessManager manager;
     QNetworkRequest request(url);
@@ -17,7 +22,7 @@ QByteArray TaskHttpClient::makeGetRequest(const QUrl &url)
 
     QEventLoop loop;
     QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-    loop.exec(); // Wait for the request to finish
+    loop.exec();
 
     if (reply->error() == QNetworkReply::NoError) {
         return reply->readAll();

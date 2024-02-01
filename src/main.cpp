@@ -39,15 +39,16 @@ int main(int argc, char *argv[])
     engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
     engine.addImportPath(":/");
 
-    QUrl apiUrl(
-        "https://jsonplaceholder.typicode.com/todos/1"); // Replace with your actual API endpoint
     TaskHttpClient *client = new TaskHttpClient();
-    QByteArray jsonData = client->makeGetRequest(apiUrl);
+    QByteArray jsonData = client->GetAllTasks();
 
     TaskJSONMapper *mapper = new TaskJSONMapper();
-    Task* task2 = mapper->FromJSON(jsonData);
+    QList<Task*> tasks = mapper->ListFromJSON(jsonData);
 
-    qDebug() << task2->id();
+    for(int i = 0; i < tasks.length(); i++) {
+        qDebug() << tasks.at(i)->id() << " " << tasks.at(i)->name();
+    }
+
     engine.load(url);
 
     if (engine.rootObjects().isEmpty()) {
