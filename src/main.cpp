@@ -40,10 +40,7 @@ int main(int argc, char *argv[])
     engine.addImportPath(":/");
 
     TaskHttpClient *client = new TaskHttpClient();
-    QByteArray jsonData = client->GetAllTasks();
-
-    TaskJSONMapper *mapper = new TaskJSONMapper();
-    QList<Task*> tasks = mapper->ListFromJSON(jsonData);
+    QList<Task*> tasks = client->GetAllTasks();
 
     for(int i = 0; i < tasks.length(); i++) {
         qDebug() << tasks.at(i)->id() << " " << tasks.at(i)->name();
