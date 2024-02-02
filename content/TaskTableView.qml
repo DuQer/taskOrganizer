@@ -33,12 +33,12 @@ Item {
         boundsBehavior: Flickable.StopAtBounds
 
         rowHeightProvider:  function() {
-                    return 20;
-                }
+            return 20;
+        }
 
         columnWidthProvider: function(column) {
-                    return parent.width * 0.33
-                }
+            return parent.width * 0.33
+        }
 
         delegate: Rectangle {
             id: delegat
@@ -47,10 +47,7 @@ Item {
             required property int row
             required property int column
             required property string taskData
-            required property string newTaskData
             property bool pooled: false
-
-
 
             color: selected ? "#c9bda7" : "#d1b37b"
 
@@ -60,10 +57,19 @@ Item {
                 anchors.verticalCenter: delegat.verticalCenter
             }
 
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+
+                onEntered: {
+                    delegat.color = "#aabbcc"; // Możesz dostosować ten kolor według potrzeb
+                }
+
+                onExited: {
+                    delegat.color = selected ? "#c9bda7" : "#d1b37b";
+                }
+            }
         }
 
-        selectionModel: ItemSelectionModel {
-            model: table.model
-        }
     }
 }
