@@ -9,6 +9,7 @@
 #include "import_qml_plugins.h"
 #include "src/task.h"
 #include "src/taskhttpclient.h"
+#include "src/taskmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -33,6 +34,8 @@ int main(int argc, char *argv[])
 
     TaskHttpClient *client = new TaskHttpClient();
     QList<Task*> tasks = client->GetAllTasks();
+
+    qmlRegisterType<TaskModel>("TaskModel", 1, 0, "TaskModel"); // zarejestrowanie typu po nazwie klasy do modułu MyModule o wersji 1.0
 
     for(int i = 0; i < tasks.length(); i++) {
         qDebug() << tasks.at(i)->id() << " " << tasks.at(i)->name();

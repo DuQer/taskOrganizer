@@ -1,5 +1,10 @@
 #include "task.h"
 
+Task::Task(const QString &name, const QString &description, bool completed)
+    : m_name(name), m_description(description), m_completed(completed)
+{
+    // ... inicjalizacja pozostałych składowych ...
+}
 
 int Task::id() const
 {
