@@ -9,6 +9,7 @@
 class TaskModel : public QAbstractTableModel
 {
     Q_OBJECT
+
 public:
     explicit TaskModel(QObject *parent = nullptr);
 
@@ -20,9 +21,8 @@ public:
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 
-    Q_INVOKABLE void addTask(const QString &name, const QString &description, const bool completed);
-    Q_INVOKABLE void sayHello();
-
+    Q_INVOKABLE void addTask(const QString &name, const int id, const bool completed);
+    Q_INVOKABLE void fetchData();
 
 protected:
     QHash<int, QByteArray> roleNames() const override;
