@@ -1,5 +1,6 @@
 #include "taskmodel.h"
 #include "task.h"
+#include <QDebug>
 
 TaskModel::TaskModel(QObject *parent)
     : QAbstractTableModel{parent}
@@ -93,8 +94,7 @@ Qt::ItemFlags TaskModel::flags(const QModelIndex &index) const
     return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
 }
 
-void TaskModel::addTask(const QString &name, const QString &description,
-                        const bool completed)
+void TaskModel::addTask(const QString &name, const QString &description, const bool completed)
 {
     Task task;
     task.setName(name);
@@ -108,7 +108,11 @@ void TaskModel::addTask(const QString &name, const QString &description,
 QHash<int, QByteArray> TaskModel::roleNames() const {
     QHash<int, QByteArray> roles = QAbstractTableModel::roleNames();
     roles[Qt::DisplayRole] = "taskData";
-    roles[Qt::EditRole] = "newtaskData";
+    roles[Qt::EditRole] = "newTaskData";
     return roles;
+}
+
+void TaskModel::sayHello() {
+    qDebug() << "hello";
 }
 

@@ -7,6 +7,7 @@ class Task
 {
 
 public:
+    Task(const QString &name = "", const QString &description = "", bool completed = false);
     int id() const;
     void setId(int id);
 
