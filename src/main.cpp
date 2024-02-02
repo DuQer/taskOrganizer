@@ -9,7 +9,6 @@
 #include "import_qml_plugins.h"
 #include "src/task.h"
 #include "src/taskhttpclient.h"
-#include "src/mapper/taskjsonmapper.h"
 
 int main(int argc, char *argv[])
 {
@@ -29,13 +28,6 @@ int main(int argc, char *argv[])
         },
         Qt::QueuedConnection);
 
-    // Rejestracja klasy Task do użycia w QML
-    qmlRegisterType<Task>("MyTasks", 1, 0, "Task");
-
-    // Tworzenie obiektu Task i przekazanie go do QML
-    Task task;
-    engine.rootContext()->setContextProperty("myTask", &task);
-
     engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
     engine.addImportPath(":/");
 
@@ -45,7 +37,6 @@ int main(int argc, char *argv[])
     for(int i = 0; i < tasks.length(); i++) {
         qDebug() << tasks.at(i)->id() << " " << tasks.at(i)->name();
     }
-
     engine.load(url);
 
     if (engine.rootObjects().isEmpty()) {

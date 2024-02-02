@@ -3,7 +3,6 @@
 
 import QtQuick 6.2
 import taskOrganizer
-import MyTasks 1.0
 
 Window {
     visible: true
@@ -11,6 +10,15 @@ Window {
     height: 300
     title: qsTr("Task manager")
     color: "#26648E"
+
+    TaskModel {
+            id: myModel
+
+            Component.onCompleted: {
+                for (var i = 1; i <= 100; i++)
+                    myModel.addBook("Author " + i, "Title " + i, "Publisher " + i, + (1900 + i), "ISBN " + i);
+            }
+        }
 
     ListView {
             width: parent.width
@@ -48,13 +56,6 @@ Window {
     // prawy panel wyświetlający listę obiektów typu Task
     RightPanel {
 
-        Task {
-                id: myTask
-                name: "Zadanie 1"
-                description: "Opis zadania 1"
-                completed: false
-            }
-
             Rectangle {
                 width: 200
                 height: 100
@@ -62,7 +63,7 @@ Window {
 
                 Text {
                     anchors.centerIn: parent
-                    text: "Task Information:\nName: " + myTask.name + "\nDescription: " + myTask.description + "\nCompleted: " + myTask.completed
+                    text: "Task Information:\nName: " + "\nDescription: "  + "\nCompleted: "
                 }
             }
     }

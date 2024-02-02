@@ -1,10 +1,5 @@
 #include "task.h"
 
-Task::Task(QObject *parent)
-    : QObject(parent)
-    , m_id(0)
-    , m_completed(false)
-{}
 
 int Task::id() const
 {
@@ -17,7 +12,6 @@ void Task::setId(int id)
         return;
 
     m_id = id;
-    emit idChanged();
 }
 
 QString Task::name() const
@@ -31,7 +25,6 @@ void Task::setName(const QString &name)
         return;
 
     m_name = name;
-    emit nameChanged();
 }
 
 QString Task::description() const
@@ -45,7 +38,6 @@ void Task::setDescription(const QString &description)
         return;
 
     m_description = description;
-    emit descriptionChanged();
 }
 
 bool Task::completed() const
@@ -59,5 +51,4 @@ void Task::setCompleted(bool completed)
         return;
 
     m_completed = completed;
-    emit completedChanged();
 }
