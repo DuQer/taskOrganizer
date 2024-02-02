@@ -2,7 +2,7 @@ import QtQuick
 
 Item {
     id: rightPanel
-    width: parent.width * 3/4
+    width: parent.width * 0.75
     height: parent.height
 
     anchors.right: parent.right
@@ -11,8 +11,10 @@ Item {
         anchors.fill: parent
         color: "#FFE3B3"
     }
-    CheckboxButton {
-    }
-    MouseArea {
+
+    // table view do wyświetlania tasków
+    TaskTableView {
+        width: rightPanel.width
+        height: rightPanel.height
     }
 }

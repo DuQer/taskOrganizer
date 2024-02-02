@@ -1,6 +1,7 @@
 #include "taskmodel.h"
 #include "task.h"
 #include <QDebug>
+#include "taskhttpclient.h"
 
 TaskModel::TaskModel(QObject *parent)
     : QAbstractTableModel{parent}
@@ -27,7 +28,7 @@ QVariant TaskModel::headerData(int section, Qt::Orientation orientation, int rol
     case 0:
         return "Name";
     case 1:
-        return "Description";
+        return "Id";
     case 2:
         return "Completed";
     default:
@@ -49,7 +50,7 @@ QVariant TaskModel::data(const QModelIndex & index, int role) const
     case 0:
         return task.name();
     case 1:
-        return task.description();
+        return task.id();
     case 2:
         return task.completed();
     default:
@@ -70,7 +71,7 @@ bool TaskModel::setData(const QModelIndex &index, const QVariant &value, int rol
             ret = true;
             break;
         case 1:
-            task.setDescription(value.toString());
+            task.setId(value.toInt());
             ret = true;
             break;
         case 2:
@@ -94,11 +95,11 @@ Qt::ItemFlags TaskModel::flags(const QModelIndex &index) const
     return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
 }
 
-void TaskModel::addTask(const QString &name, const QString &description, const bool completed)
+void TaskModel::addTask(const QString &name, const int id, const bool completed)
 {
     Task task;
+    task.setId(id);
     task.setName(name);
-    task.setDescription(description);
     task.setCompleted(completed);
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     m_tasks.append(task);
@@ -112,7 +113,12 @@ QHash<int, QByteArray> TaskModel::roleNames() const {
     return roles;
 }
 
-void TaskModel::sayHello() {
-    qDebug() << "hello";
-}
+void TaskModel::fetchData() {
+    TaskHttpClient* client = new TaskHttpClient();
+    QList<Task*> tasks = client->GetAllTasks();
 
+    for(int i = 0; i < tasks.length(); i++) {
+        Task* task = tasks[i];
+        addTask(task->name(), task->id(), task->completed());
+    }
+}
